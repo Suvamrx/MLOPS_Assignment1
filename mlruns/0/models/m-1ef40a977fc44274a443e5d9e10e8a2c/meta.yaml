@@ -1,0 +1,10 @@
+artifact_location: file:///C:/Users/LENOVO/MLOPS_Assignment1/mlruns/0/models/m-1ef40a977fc44274a443e5d9e10e8a2c/artifacts
+creation_timestamp: 1766422888315
+experiment_id: '0'
+last_updated_timestamp: 1766422890821
+model_id: m-1ef40a977fc44274a443e5d9e10e8a2c
+model_type: null
+name: model
+source_run_id: 11be0c1cdd404eecb1c2cb4e4077c672
+status: 2
+status_message: null
