@@ -16,6 +16,10 @@ df = pd.read_csv('data/raw_heart_disease.csv')
 df = df.replace('?', np.nan).fillna(df.median())
 df['target'] = df['target'].apply(lambda x: 1 if x > 0 else 0)
 
+# Saving the cleaned dataset
+df.to_csv('data/processed_heart_disease.csv', index=False)
+print("Cleaned dataset saved to data/processed_heart_disease.csv")
+
 # 2. Define features
 X = df.drop('target', axis=1)
 y = df['target']
