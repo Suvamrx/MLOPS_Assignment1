@@ -17,10 +17,10 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-Instrumentator().instrument(app).expose(app)
-
 # 2. Initialize FastAPI
 app = FastAPI(title="Heart Disease Prediction API")
+
+Instrumentator().instrument(app).expose(app)
 
 # 3. Define Input Structure
 class PatientData(BaseModel):
