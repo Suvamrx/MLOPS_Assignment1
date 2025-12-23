@@ -23,6 +23,11 @@ jobs:
         with:
           python-version: '3.9'
 
+      - name: Lint with Ruff or Flake8
+        run: |
+          pip install ruff
+          ruff check .  
+        
       - name: Run Tests
         run: |
           pip install -r requirements.txt
