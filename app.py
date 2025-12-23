@@ -4,17 +4,20 @@ import pandas as pd
 import joblib
 import os
 import logging
+from prometheus_fastapi_instrumentator import Instrumentator
 
 # 1. Configure logging
 logging.basicConfig(
     level=logging.INFO,
-    format="%(asctime)s - %(levelname)s - %(message)s",
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     handlers=[
-        logging.FileHandler("prediction.log"), # Fixed typo here
+        logging.FileHandler("api_usage.log"),
         logging.StreamHandler()
     ]
 )
 logger = logging.getLogger(__name__)
+
+Instrumentator().instrument(app).expose(app)
 
 # 2. Initialize FastAPI
 app = FastAPI(title="Heart Disease Prediction API")
