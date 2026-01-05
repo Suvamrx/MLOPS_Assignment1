@@ -2,7 +2,7 @@
 
 **Author:** Suvamrx  
 **GitHub Repository:** [suvamrx/MLOPS_Assignment1](https://github.com/suvamrx/MLOPS_Assignment1)  
-**Registry:** `ghcr.io/suvamrx/heart-api`
+**Registry:** `ghcr.io/suvamrx/mlops_assignment1:latest`
 
 ---
 
@@ -14,6 +14,13 @@ The system is designed for reproducibility using a containerized approach.
 
   ```bash
   pip install -r requirements.txt
+  ```
+
+- **Docker (optional):** Build and run the API locally:
+
+  ```bash
+  docker build -t heart-api:latest .
+  docker run -p 8000:8000 heart-api:latest
   ```
 
 - **Training:** Run the training script to clean the raw data, save the processed CSV, and generate the model.joblib artifact:
@@ -77,6 +84,16 @@ The comparison between the baseline and the optimized model is summarized below:
 | :--- | :--- | :--- | :--- | :--- |
 | Logistic Regression | 0.836 | 0.843 | 0.843 | 0.915 |
 | **Random Forest** | **0.868** | **0.928** | **0.812** | **0.945** |
+
+### Model Evaluation — Confusion Matrices
+
+Below are the confusion matrices for the trained models, showing true vs predicted labels.
+
+**Logistic Regression**  
+![Confusion Matrix — Logistic Regression](./screenshots/confusion_matrix_Logistic_Regression.png)
+
+**Random Forest**  
+![Confusion Matrix — Random Forest](./screenshots/confusion_matrix_Random_Forest.png)
 
 > **Analysis:** The Random Forest model was selected for the production deployment due to its superior accuracy (86.8%) and excellent ROC-AUC (0.945), indicating strong discriminative power (ability to distinguish between diseased and healthy patients). This model was successfully registered and dumped to `model.joblib` for deployment.
 ![MLFLOW UI](./screenshots/mlFlow_ui.png)
