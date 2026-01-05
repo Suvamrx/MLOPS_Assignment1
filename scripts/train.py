@@ -113,7 +113,7 @@ def train_model(model_name, model_obj):
         mlflow.log_metrics(metrics)
         mlflow.sklearn.log_model(clf, "model")
         print(f"Finished {model_name}: {metrics}")
-        joblib.dump(clf, f"model_{model_name}.joblib") 
+        joblib.dump(clf, 'model.joblib') 
         print("Model saved successfully as model.joblib")
 
 # 5. Run training for two models (Requirement 2)
