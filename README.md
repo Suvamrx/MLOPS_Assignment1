@@ -1,6 +1,16 @@
 # Heart Disease Prediction: MLOps Pipeline Report
+## MLOPS_Assignment1 - Group 76
 
-**Author:** Suvamrx  
+**Contributors:**  
+
+| Name | BITS ID |
+| :--- | :--- |
+| SUVAM PATTNAIK | 2024AA05851 |
+| JITENDRA KUMAR CHAUDHARY | 2024AA05875 |
+| WANI ANIKET JAYANT | 2024AA05690 |
+| AKRAM SADIQ VALI PAMADI | 2024AA05054 |
+| SAMUJJWAL SINGH CHAUHAN | 2024AA05271 |
+
 **GitHub Repository:** [suvamrx/MLOPS_Assignment1](https://github.com/suvamrx/MLOPS_Assignment1)  
 **Registry:** `ghcr.io/suvamrx/mlops_assignment1:latest`
 
@@ -54,6 +64,9 @@ Before training, I conducted an analysis of the UCI Heart Disease dataset to und
 
 * **Feature Correlation:** The heatmap reveals significant correlations. Features such as `cp` (chest pain type), `thal`, and `ca` show strong positive correlations with heart disease, while `thalach` (maximum heart rate achieved) shows a strong negative correlation.
 ![Feature Correlation Heatmap](./screenshots/heatmap.png)
+
+* **Feature Distribution:** Example histogram showing the distribution of a key numerical feature (e.g., `thalach`).
+![Feature Histogram — thalach](./screenshots/histograms.png)
 
 ### Modelling Choices
 To meet the project requirements, a robust machine learning pipeline was constructed:
