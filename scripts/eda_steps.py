@@ -28,4 +28,9 @@ sns.countplot(x='target', data=df)
 plt.title("Class Balance (0: No Disease, 1: Disease)")
 plt.savefig('screenshots/class_balance.png')
 
+# Feature Histograms
+df.hist(figsize=(12, 10), bins=20)
+plt.suptitle("Feature Distributions")
+plt.savefig('screenshots/histograms.png')
+
 print("EDA completed. Check the 'screenshots' folder for your report images.")

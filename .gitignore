@@ -17,6 +17,7 @@ env/
 .idea/
 .vscode/
 *.swp
+model.joblib
 
 # Logs
 *.log

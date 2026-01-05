@@ -10,6 +10,10 @@ from sklearn.pipeline import Pipeline
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, precision_score, recall_score, roc_auc_score
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+from sklearn.model_selection import cross_val_score
+import matplotlib.pyplot as plt
+import os
 
 # 1. Load data
 df = pd.read_csv('data/raw_heart_disease.csv')
@@ -42,13 +46,29 @@ def train_model(model_name, model_obj):
         clf.fit(X_train, y_train)
         
         y_pred = clf.predict(X_test)
+        cv_scores = cross_val_score(clf, X, y, cv=5, scoring='accuracy')
         metrics = {
             "accuracy": accuracy_score(y_test, y_pred),
             "precision": precision_score(y_test, y_pred),
             "recall": recall_score(y_test, y_pred),
-            "roc_auc": roc_auc_score(y_test, clf.predict_proba(X_test)[:, 1])
+            "roc_auc": roc_auc_score(y_test, clf.predict_proba(X_test)[:, 1]),
+            "cv_accuracy_mean": cv_scores.mean(),
+            "cv_accuracy_std": cv_scores.std()
         }
+
+        # Generate and log confusion matrix plot
+        cm = confusion_matrix(y_test, y_pred)
+        disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=["No Disease", "Disease"])
+        disp.plot(cmap="Blues")
+        plt.title(f"Confusion Matrix - {model_name}")
         
+        # Save plot and log to MLflow
+        plot_path = f"confusion_matrix_{model_name}.png"
+        plt.savefig(plot_path)
+        plt.close()
+        mlflow.log_artifact(plot_path)
+        os.remove(plot_path)  # Clean up local file after logging
+
         mlflow.log_params(model_obj.get_params())
         mlflow.log_metrics(metrics)
         mlflow.sklearn.log_model(clf, "model")
@@ -60,3 +80,4 @@ def train_model(model_name, model_obj):
 if __name__ == "__main__":
     train_model("Logistic_Regression", LogisticRegression())
     train_model("Random_Forest", RandomForestClassifier(n_estimators=100))
+
