@@ -15,6 +15,9 @@ from sklearn.model_selection import cross_val_score
 import matplotlib.pyplot as plt
 import os
 
+# Set MLflow tracking URI to local directory (works in CI and local environments)
+mlflow.set_tracking_uri("file://" + os.path.abspath("mlruns"))
+
 # 1. Load data
 df = pd.read_csv('data/raw_heart_disease.csv')
 df = df.replace('?', np.nan).fillna(df.median())
