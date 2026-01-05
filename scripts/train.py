@@ -14,9 +14,41 @@ from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 from sklearn.model_selection import cross_val_score
 import matplotlib.pyplot as plt
 import os
+from pathlib import Path
+import yaml
+import time
 
 # Set MLflow tracking URI to local directory (works in CI and local environments)
-mlflow.set_tracking_uri("file://" + os.path.abspath("mlruns"))
+# Use a proper file URI on Windows (file:///C:/...) via Path.as_uri()
+mlflow.set_tracking_uri(Path("mlruns").resolve().as_uri())
+# Ensure mlruns directory exists
+mlruns_dir = Path("mlruns")
+mlruns_dir.mkdir(parents=True, exist_ok=True)
+
+# Auto-repair malformed experiment directories: create minimal meta.yaml if missing
+for exp_dir in mlruns_dir.iterdir():
+    if not exp_dir.is_dir():
+        continue
+    meta_file = exp_dir / "meta.yaml"
+    if not meta_file.exists():
+        print(f"WARNING: mlflow experiment dir '{exp_dir}' missing meta.yaml — creating minimal meta.yaml")
+        meta = {
+            "artifact_location": exp_dir.resolve().as_uri(),
+            "creation_time": int(time.time() * 1000),
+            "experiment_id": exp_dir.name,
+            "last_update_time": int(time.time() * 1000),
+            "lifecycle_stage": "active",
+            "name": ("Default" if exp_dir.name == "0" else exp_dir.name)
+        }
+        try:
+            with open(meta_file, "w", encoding="utf-8") as f:
+                yaml.safe_dump(meta, f)
+            print(f"Created minimal meta.yaml for experiment '{exp_dir.name}'")
+        except Exception as e:
+            print(f"ERROR: Could not write meta.yaml for {exp_dir}: {e}")
+
+# Create or set an experiment explicitly so mlflow will write the necessary metadata files
+mlflow.set_experiment("heart_disease_experiment")
 
 # 1. Load data
 df = pd.read_csv('data/raw_heart_disease.csv')
@@ -81,7 +113,7 @@ def train_model(model_name, model_obj):
         mlflow.log_metrics(metrics)
         mlflow.sklearn.log_model(clf, "model")
         print(f"Finished {model_name}: {metrics}")
-        joblib.dump(clf, 'model.joblib') 
+        joblib.dump(clf, f"model_{model_name}.joblib") 
         print("Model saved successfully as model.joblib")
 
 # 5. Run training for two models (Requirement 2)
