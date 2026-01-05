@@ -23,6 +23,9 @@ model.joblib
 *.log
 api_usage.log
 
+# MLflow (regenerated on each run)
+mlruns/
+
 # OS files
 .DS_Store
 Thumbs.db
