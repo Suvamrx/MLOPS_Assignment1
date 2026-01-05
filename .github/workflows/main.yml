@@ -25,14 +25,25 @@ jobs:
         with:
           python-version: '3.9'
 
-      - name: Lint with Ruff or Flake8
+      - name: Lint with Ruff
         run: |
           pip install ruff
           ruff check .  
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Download dataset
+        run: |
+          python scripts/download_Heart_Disease_UCI_Dataset.py
+
+      - name: Train model
+        run: |
+          python scripts/train.py
         
       - name: Run Tests
         run: |
-          pip install -r requirements.txt
           pytest
 
       - name: Set lowercase repository name
