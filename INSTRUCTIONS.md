@@ -5,7 +5,7 @@ This document provides the full technical guide for setting up and running the M
 ## Execution Order
 To successfully replicate the project from scratch, run the scripts in this specific order:
 
-1. python scripts/download_data.py: Fetches the raw dataset from the UCI repository.
+1. python scripts/download_Heart_Disease_UCI_Dataset.py: Fetches the raw dataset from the UCI repository.
 
 2. python scripts/train.py: Cleans the data, logs experiments to MLflow, and saves model.joblib.
 
@@ -79,7 +79,6 @@ Apply the manifests to your local cluster:
 ```bash
 # Deploy Pods and Service
 kubectl apply -f kubernetes/deployment.yaml
-kubectl apply -f kubernetes/service.yaml
 ```
 ### Verification Commands
 Check the status of your deployment:
@@ -94,8 +93,6 @@ kubectl get svc heart-disease-service
 ### Monitoring (Prometheus Metrics)
 The API exposes real-time operational metrics via the Prometheus instrumentator. You can view these by navigating to:
 * **Metrics Endpoint:** `http://localhost/metrics`
-* **Health Check:** `http://localhost/health`
-
 ---
 
 ## 6. API Usage Example
