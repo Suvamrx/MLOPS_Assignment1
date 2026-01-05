@@ -65,12 +65,17 @@ def train_model(model_name, model_obj):
         disp.plot(cmap="Blues")
         plt.title(f"Confusion Matrix - {model_name}")
         
-        # Save plot and log to MLflow
-        plot_path = f"confusion_matrix_{model_name}.png"
+        # Save plot to screenshots folder
+        os.makedirs("screenshots", exist_ok=True)
+        plot_path = f"screenshots/confusion_matrix_{model_name}.png"
         plt.savefig(plot_path)
         plt.close()
-        mlflow.log_artifact(plot_path)
-        os.remove(plot_path)  # Clean up local file after logging
+        
+        # Try to log artifact to MLflow (may fail in CI)
+        try:
+            mlflow.log_artifact(plot_path)
+        except Exception as e:
+            print(f"Warning: Could not log artifact to MLflow: {e}")
 
         mlflow.log_params(model_obj.get_params())
         mlflow.log_metrics(metrics)
