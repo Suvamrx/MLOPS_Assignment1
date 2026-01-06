@@ -14,6 +14,8 @@
 **GitHub Repository:** [suvamrx/MLOPS_Assignment1](https://github.com/suvamrx/MLOPS_Assignment1)  
 **Registry:** `ghcr.io/suvamrx/mlops_assignment1:latest`
 
+**Note:** A short video link showing end to end pipeline present at the end of this file.
+
 ---
 
 ## 1. Setup & Installation
@@ -172,3 +174,6 @@ The API exposes technical performance metrics using the Prometheus format. This 
 The implemented MLOps pipeline successfully bridges the gap between manual data science experimentation and automated cloud-native deployment. By leveraging **MLflow** for experiment tracking and **Kubernetes** for orchestration, the system is prepared for scalable production use with high reliability.
 
 **Final Repository Link:** [https://github.com/suvamrx/MLOPS_Assignment1](https://github.com/suvamrx/MLOPS_Assignment1)
+
+
+**Short Video Link to show end to end pipeline:** [https://wilpbitspilaniacin0-my.sharepoint.com/:v:/g/personal/2024aa05851_wilp_bits-pilani_ac_in/IQC2BO5QocNTRpqML4xtwr3_ARfgc5GalaNSkBhAMpmS_m0?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=S4kwvh](https://wilpbitspilaniacin0-my.sharepoint.com/:v:/g/personal/2024aa05851_wilp_bits-pilani_ac_in/IQC2BO5QocNTRpqML4xtwr3_ARfgc5GalaNSkBhAMpmS_m0?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=S4kwvh)
